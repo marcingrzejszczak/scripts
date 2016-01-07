@@ -1,0 +1,102 @@
+[branch]
+    autosetupmerge = true
+
+[push]
+    default = tracking
+
+[color]
+    ui = auto
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[alias]
+    #those who don't know history, are doomed to repeat it
+    hist = log --pretty=format:'%Cred%h%Creset %C(bold blue)<%an>%Creset%C(yellow)%d%Creset %Cgreen(%cr)%Creset%n%w(80,8,8)%s' --graph
+    histfull = log --pretty=format:'%Cred%h%Creset %C(bold blue)<%an>%Creset%C(yellow)%d%Creset %Cgreen(%cr)%Creset%n%w(80,8,8)%s%n' --graph --name-status
+    llog = log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=iso
+    changelog = log --pretty=format:'%Cgreen%d %Creset%s' --date=iso
+    ls = log --pretty=format:'%C(yellow)%p..%h %C(white dim)%cd %<|(49,trunc)%an %C(reset)%s' --date=short --abbrev=8 --no-merges
+
+    #wish i knew
+    whois = "!sh -c 'git log -i -1 --pretty=\"format::%an <%ae>\n\" --author=\"$1\"' -"
+    whatis = show -s --pretty='tformat::%h (%s, %ad)' --date=short
+    howmany = "!sh -c 'git log -a --pretty=oneline | wc -l'"
+    howmanybywhom = shortlog -sn
+
+    #what's going on, I don't even
+    anychanges = !sh -c 'git fetch' && git log --oneline HEAD..origin/$1
+    anychangesonmaster = !sh -c 'git fetch' && git log --oneline HEAD..origin/master
+    whoischanging = !sh -c 'git shortlog HEAD..origin/$0'
+    whoischangingmaster = !sh -c 'git shortlog HEAD..origin/master'
+    
+    #what branches you have on origin, with info on who is guilty and how long ago. Useful for gitflow and feature branches in general. Requires fetch up-front.
+    showorigin = "!sh -c 'for branch in `git branch -r | grep -v HEAD`;do echo `git show -s --format=\"%Cred%ci %C(green)%h %C(yellow)%cr %C(magenta)%an %C(blue)\" $branch | head -n 1` \\\t$branch; done | sort -r'"
+
+    #get remote branches
+    trackallbranches = !sh -c "for branchname in `git branch -r `; do git branch --track $branchname; done"
+    updateallbranches = !sh -c "for branchname in `git branch -r `; do git checkout $branchname ; git pull; done"
+
+    # fix .gitignore
+    fixgitignore = !git rm -r --cached . && git add . && git commit -m \"Just a .gitignore fix \"
+
+    #tags
+    showtags = show-ref --tags
+    pushtags = push --tags
+    tagwithdate = !sh -c 'git tag "$0"_$(date "+%y-%m-%d_%H-%M-%S")'
+    lasttag = describe --abbrev=0 --tags
+    checkoutlasttag = !sh -c 'git checkout `git describe --abbrev=0 --tags`'
+
+    #better versions
+    purr = pull --rebase
+    difff = diff --color-words #just words
+    bbranch = branch -v    
+    branches = branch -avvl
+    sth = stash -u
+
+    #what do I have in my toolbox?
+    alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+
+    #fiat lux
+    makegitrepo = !git init && git add . && git commit -m \"initial commit\"
+    
+    #Finds a filename in the git repository. Gives absolute location (from the git root).
+    find = !sh -c 'git ls-tree -r --name-only HEAD | grep --color $1' - 
+
+    #Deletes all branches that were safely merged into the master. All other are skipped (no worries).
+    cleanup = !git branch --merged master | grep -v 'master$' | xargs -r git branch -d  
+
+    #Deletes orphaned remote branches (.git/refs/remotes/origin), clean up reflog and remove all untracked files
+    cleanuplocal = !git remote prune origin && git gc && git clean -df
+
+    unstage = reset HEAD --
+
+    # Check if any file in repo has whitespace errors
+    # As described in http://peter.eisentraut.org/blog/2014/11/04/checking-whitespace-with-git/
+    check-whitespace = !git diff-tree --check $(git hash-object -t tree /dev/null) HEAD
+
+    # for git-root command
+    proot = !pwd
+
+[apply]
+    whitespace = nowarn
+[core]
+    pager = less -r
+[help]
+    autocorrect = 1 #fucking magic!
+
+#Kudos for (copied from):
+#http://git-scm.com/book/en/Customizing-Git-Git-Configuration
+#http://robots.thoughtbot.com/post/4747482956/streamline-your-git-workflow-with-aliases
+#http://oli.jp/2012/git-powerup/#conclusion
+#http://blog.blindgaenger.net/advanced_git_aliases.html

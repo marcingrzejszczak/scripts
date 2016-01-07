@@ -1,0 +1,5 @@
+- name: java
+  hosts: localhost
+  connection: local
+  roles:
+    - { role: oracle_jdk, oracle_jdk_version: '8u45-b14' }
