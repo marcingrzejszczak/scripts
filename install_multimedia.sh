@@ -32,17 +32,7 @@ sudo apt-get upgrade -y
 sudo apt-get autoremove -y
 
 # INSTALL SPOTIFY
-
-#1. Dodaj ten wiersz do listy rezpozytoriów, edytując listy
-# /etc/apt/sources.list
 echo "deb http://repository.spotify.com stable non-free" | sudo tee --append /etc/apt/sources.list
-
-# 2. Jeśli chcesz sprawdzić pobrane paczki,
-#dodaj klucz publiczny
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59
-
-# 3. Uruchom polecenie apt-get update
 sudo apt-get update
-
-# 4. Zainstaluj aplikację Spotify!
 sudo apt-get install spotify-client -y

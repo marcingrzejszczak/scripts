@@ -80,6 +80,16 @@ sudo sysctl -p
 sudo apt-get autoremove -y
 
 # INSTALL DOCKER
+sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+sudo rm -f /etc/apt/sources.list.d/docker.list
+echo "deb https://apt.dockerproject.org/repo ubuntu-wily main" | sudo tee --append /etc/apt/sources.list.d/docker.list
+sudo apt-get update -y
+sudo apt-get purge lxc-docker
+sudo apt-cache policy docker-engine
+sudo apt-get install linux-image-extra-$(uname -r)
+sudo apt-get install docker-engine
+sudo service docker start
+
 sudo curl -sSL https://get.docker.com/gpg | sudo apt-key add -
 sudo curl -sSL https://get.docker.com/ | sh
 sudo usermod -aG docker marcin
@@ -103,12 +113,6 @@ curl -sL "https://deb.nodesource.com/setup_4.x" | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo apt-get install -y build-essential
 
-# Install Docker-compose
-# https://docs.docker.com/compose/install/
-# sudo -i
-# curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-# chmod +x /usr/local/bin/docker-compose
-
 # Install pipelight
 sudo add-apt-repository ppa:pipelight/stable
 sudo apt-get update
@@ -125,6 +129,7 @@ wget -O /tmp/idea.tar.gz https://download.jetbrains.com/idea/ideaIU-15.0.2.tar.g
 mkdir $HOME/apps/JetBrains --parents
 tar -xf /tmp/idea.tar.gz -C $HOME/apps/JetBrains/
 ln -s $HOME/apps/JetBrains/idea-IU-143.1184.17 $HOME/apps/JetBrains/intellij
+# REMEMBER TO IMPORT SETTINGS FROM idea_settings.jar
 
 # Install Skype
 sudo apt-get install libqt4-dbus libqt4-network libqt4-xml libasound2 -y
@@ -138,3 +143,13 @@ sudo apt-get -f install -y
 # sudo wget -O - https://www.hipchat.com/keys/hipchat-linux.key | sudo apt-key add -
 # sudo apt-get update
 # sudo apt-get install hipchat -y
+
+# Install Hangouts plugin
+wget -O /tmp/hangouts.deb https://dl.google.com/linux/direct/google-talkplugin_current_amd64.deb
+sudo dpkg -i /tmp/hangouts.deb
+
+# Xubuntu issues  - https://bugs.launchpad.net/ubuntu/+source/light-locker/+bug/1320989
+sudo add-apt-repository ppa:xubuntu-dev/ppa
+sudo apt-get update && sudo apt-get install xfce4-power-manager light-locker-settings
+
+# REMEMBER TO CHANGE DRIVERS TO NVIDIA!!
