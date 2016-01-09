@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install default applications
-sudo apt-get install xbmc vlc libreoffice libdvdread4 bundler pinta Shutter filezilla amarok -y
+sudo apt-get install xbmc vlc libreoffice libdvdread4 bundler pinta Shutter filezilla amarok banshee -y
 
 # Wtyczki kodi
 # http://iptvlive.org/component/weblinks/weblink/20-sd-xbmc?Itemid=435&task=weblink.go
