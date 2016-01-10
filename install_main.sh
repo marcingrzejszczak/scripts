@@ -153,3 +153,7 @@ sudo add-apt-repository ppa:xubuntu-dev/ppa
 sudo apt-get update && sudo apt-get install xfce4-power-manager light-locker-settings
 
 # REMEMBER TO CHANGE DRIVERS TO NVIDIA!!
+
+# Install Viber
+wget -O /tmp/viber.deb http://download.cdn.viber.com/cdn/desktop/Linux/viber.deb
+sudo dpkg -i /tmp/viber.deb
