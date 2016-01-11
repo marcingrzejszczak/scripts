@@ -55,3 +55,6 @@ unzip /tmp/atom-mac.zip -d /Applications
 
 # INSTALL ATOM PACKAGES
 apm install language-groovy an-color-picker atom-beautify merge-conflicts minimap file-icons travis-ci-status open-recent monokai-seti seti-ui todo-show highlight-selected minimap-highlight-selected autoclose-html pigments linter linter-javac linter-shellcheck linter-jsonlint linter-js-yaml auto-detect-indentation atom-beautify rest-client
+
+# DOCKER
+# http://mageinferno.com/blog/using-docker-machine-os-x-dinghy
