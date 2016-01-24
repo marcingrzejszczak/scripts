@@ -34,6 +34,14 @@ function jdk8 --description 'Set Java to jdk8'
     sudo ln -s /usr/lib/jvm/java-8-oracle /usr/lib/jvm/default-java
 end
 
+function brightness_max --description 'Set max brightness'
+     echo 4302 | sudo tee /sys/class/backlight/intel_backlight/brightness
+end
+
+function brightness_min --description 'Set min brightness'
+     echo 100 | sudo tee /sys/class/backlight/intel_backlight/brightness
+end
+
 function fish_prompt --description 'Write out the prompt'
   set -l last_status $status
 

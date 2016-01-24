@@ -30,6 +30,45 @@ cat > ~/.xbindkeysrc << EOF
     Control + Shift + plus
 EOF
 
+# Brightness issues
+
+# APPROACH 1
+
+# What worked for me was modifying the /etc/default/grub file.
+# Change the line
+#
+# GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+# to
+#
+# GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_osi=Linux acpi_backlight=vendor"
+# Then in a terminal sudo update-grub and reboot.
+# sudo sed 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_osi=Linux acpi_backlight=vendor"/g' /etc/default/grub
+
+
+# APPROACH 2
+# http://itsfoss.com/fix-brightness-ubuntu-1310/
+# sudo touch /usr/share/X11/xorg.conf.d/20-intel.conf
+#if grep -q -v intel_backlight /usr/share/X11/xorg.conf.d/20-intel.conf; then
+#	sudo cat >> /usr/share/X11/xorg.conf.d/20-intel.conf << EOF
+#Section "Device"
+#        Identifier  "card0"
+#        Driver      "intel"
+#        Option      "Backlight"  "intel_backlight"
+#        BusID       "PCI:0:2:0"
+#EndSection
+#EOF
+#
+#fi
+
+# APPROACH 3
+# backlight keys are working again
+# http://ubuntuforums.org/showthread.php?t=1605498
+# also installed acpi-support:i386 (don't know if relevant)
+# sudo apt-get install acpi-support:i386
+sudo sed 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="i915.powersave=0 acpi_backlight=vendor vga=792 quiet splash""i915.powersave=0 acpi_backlight=vendor vga=792 quiet splash"/g' /etc/default/grub
+sudo cp etc/acpi/*.sh /etc/acpi
+sudo update-grub
+
 # Upgrade
 sudo apt-get upgrade -y
 
