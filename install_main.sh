@@ -196,3 +196,6 @@ sudo apt-get update && sudo apt-get install xfce4-power-manager light-locker-set
 # Install Viber
 wget -O /tmp/viber.deb http://download.cdn.viber.com/cdn/desktop/Linux/viber.deb
 sudo dpkg -i /tmp/viber.deb
+
+# Install imapsync
+sudo apt-get install libio-tee-perl libunicode-string-perl -y
