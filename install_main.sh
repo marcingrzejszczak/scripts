@@ -198,4 +198,5 @@ wget -O /tmp/viber.deb http://download.cdn.viber.com/cdn/desktop/Linux/viber.deb
 sudo dpkg -i /tmp/viber.deb
 
 # Install imapsync
-sudo apt-get install libio-tee-perl libunicode-string-perl -y
+sudo apt-get install makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl -y
+
