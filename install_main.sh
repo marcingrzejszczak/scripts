@@ -205,3 +205,7 @@ gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB
 curl -sSL https://get.rvm.io | bash -s stable
 curl -L --create-dirs -o ~/.config/fish/functions/rvm.fish https://raw.github.com/lunks/fish-nuggets/master/functions/rvm.fish
 echo "rvm default" >> ~/.config/fish/config.fish
+gem install bundler
+# For Octopress blog:
+#rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
+#bundle install
