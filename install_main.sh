@@ -12,7 +12,9 @@ cp .gitconfig ~/
 
 # Sign the commits by default
 # https://help.github.com/articles/signing-commits-using-gpg/
-# git config --global user.signingkey <NUMER_KLUCZA>
+# gpg2 --list-keys
+# git config --global user.signingkey <KEY_NUMBER>
+# gpg2 --armor --export <KEY_NUMBER>
 git config --global commit.gpgsign true
 
 # Add Fish as default shell (provide the password)
