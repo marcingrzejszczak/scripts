@@ -9,6 +9,11 @@ sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmin
 
 # git kurwa
 cp .gitconfig ~/
+
+# Sign the commits by default
+# https://help.github.com/articles/signing-commits-using-gpg/
+git config --global commit.gpgsign true
+
 # Add Fish as default shell (provide the password)
 chsh -s /usr/bin/fish
 
