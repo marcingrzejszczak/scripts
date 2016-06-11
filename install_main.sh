@@ -217,3 +217,6 @@ gem install bundler
 # For Octopress blog:
 #rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
 #bundle install
+
+# http://askubuntu.com/questions/626078/mouse-cursor-invisible-after-15-04-update
+sudo apt-get install gdm -y
