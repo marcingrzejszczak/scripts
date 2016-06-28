@@ -167,9 +167,10 @@ sudo apt-get install -y --install-recommends pipelight-multi
 sudo pipelight-plugin --update
 
 # Install Slack client
-sudo apt-add-repository -y ppa:rael-gc/scudcloud
-sudo apt-get update
-sudo apt-get install -y scudcloud
+cd /tmp
+wget https://downloads.slack-edge.com/linux_releases/slack-desktop-2.0.6-amd64.deb
+sudo dpkg -i slack-*
+sudo apt-get -f install -y
 
 # Install Intellij idea
 wget -O /tmp/idea.tar.gz https://download.jetbrains.com/idea/ideaIU-15.0.2.tar.gz
