@@ -110,6 +110,9 @@ cp java-playbook.yaml ~/repo/ansible-microservice-hackathon
 cd ~/repo/ansible-microservice-hackathon
 sudo ansible-playbook -i localhost, -vvvv java-playbook.yaml
 
+sudo rm /usr/lib/jvm/default-java
+sudo ln -s /usr/lib/jvm/default-java /usr/lib/jvm/java-8-oracle
+
 # INSTALL GROOVY
 yes | sdk install groovy
 
@@ -174,7 +177,7 @@ sudo dpkg -i slack-*
 sudo apt-get -f install -y
 
 # Install Intellij idea
-wget -O /tmp/idea.tar.gz https://download.jetbrains.com/idea/ideaIU-15.0.2.tar.gz
+wget -O /tmp/idea.tar.gz https://download.jetbrains.com/idea/ideaIU-2016.1.3.tar.gz
 mkdir $HOME/apps/JetBrains --parents
 tar -xf /tmp/idea.tar.gz -C $HOME/apps/JetBrains/
 ln -s $HOME/apps/JetBrains/idea-IU-143.1184.17 $HOME/apps/JetBrains/intellij
