@@ -142,6 +142,7 @@ sudo curl -sSL https://get.docker.com/ | sh
 sudo usermod -aG docker marcin
 
 # INSTALL DOCKER-COMPOSE
+pip install --upgrade pip
 sudo pip install -U docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
