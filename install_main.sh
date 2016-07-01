@@ -111,7 +111,7 @@ cd ~/repo/ansible-microservice-hackathon
 sudo ansible-playbook -i localhost, -vvvv java-playbook.yaml
 
 sudo rm /usr/lib/jvm/default-java
-sudo ln -s /usr/lib/jvm/default-java /usr/lib/jvm/java-8-oracle
+sudo ln -s /usr/lib/jvm/java-8-oracle /usr/lib/jvm/default-java
 
 # INSTALL GROOVY
 yes | sdk install groovy
