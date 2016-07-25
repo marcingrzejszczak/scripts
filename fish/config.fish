@@ -17,6 +17,7 @@ set -gx PATH $PATH (find ~/.sdkman/*/current/bin -maxdepth 0)`
 
 . $HOME/.config/fish/informative_git_prompt.fish
 . $HOME/.config/fish/function/sdkman.fish
+. $HOME/.config/fish/function/gnupg.fish
 
 #alias gradle gw
 
