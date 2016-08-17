@@ -1,5 +1,8 @@
 # Sample config
 
+# Install fundle - https://github.com/tuvistavie/fundle
+if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
+
 set -g fish_color_user magenta
 set -g fish_color_host yellow
 set -g fish_prompt_git_status_git_dir '⚒'
@@ -85,3 +88,5 @@ function fish_right_prompt -d "Write out the right prompt"
   set_color $fish_color_normal
 
 end
+
+fundle plugin 'tuvistavie/fish-ssh-agent'

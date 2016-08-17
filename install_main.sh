@@ -22,6 +22,7 @@ chsh -s /usr/bin/fish
 
 # Copy all fish related stuff to fish directory
 cp fish ~/.config -r
+fundle install
 
 # Install ansible
 sudo apt-get install software-properties-common ansible -y
