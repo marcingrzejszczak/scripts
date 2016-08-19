@@ -46,6 +46,8 @@ function brightness_min --description 'Set min brightness'
      echo 100 | sudo tee /sys/class/backlight/intel_backlight/brightness
 end
 
+set -gx GPG_TTY (tty)
+
 function fish_prompt --description 'Write out the prompt'
   set -l last_status $status
 
