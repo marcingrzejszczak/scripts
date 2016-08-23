@@ -12,7 +12,9 @@ sudo chown -R `whoami`:admin /usr/local/bin
 sudo chown -R `whoami`:admin /usr/local/opt
 
 # Install default applications
-brew install wget midnight-commander Caskroom/cask/mcedit vim fish Caskroom/cask/vagrant ansible maven mr
+brew install wget midnight-commander Caskroom/cask/mcedit vim fish Caskroom/cask/vagrant ansible maven mr bash
+
+sudo bash -c "echo /usr/local/bin/bash >> /private/etc/shells"
 
 # git kurwa
 cp .gitconfig ~/
