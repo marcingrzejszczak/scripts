@@ -5,7 +5,7 @@ sudo apt-add-repository ppa:ansible/ansible -y
 sudo apt-get update -y
 
 # Install default applications
-sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmina remmina-plugin-rdp chromium-browser fish vagrant xbacklight xbindkeys gnome-system-monitor httpie python-pip rar unrar maven k3b -y
+sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmina remmina-plugin-rdp chromium-browser fish vagrant xbacklight xbindkeys gnome-system-monitor httpie python-pip rar unrar maven k3b myrepos -y
 
 # git kurwa
 cp .gitconfig ~/
