@@ -24,7 +24,7 @@ echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
 chsh -s /usr/local/bin/fish
 
 # Copy all fish related stuff to fish directory
-cp -R fish ~/.config
+cp -R fish ~/.config  
 
 ## INSTALL ALL THE JDKS ANS STUFF
 
