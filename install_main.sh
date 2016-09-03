@@ -226,3 +226,6 @@ gem install bundler
 
 # http://askubuntu.com/questions/626078/mouse-cursor-invisible-after-15-04-update
 sudo apt-get install gdm -y
+
+# INSTALL https://www.privateinternetaccess.com/pages/downloads
+echo "DOWNLOAD PRIVATE INTERNET ACCESS!!!!!!!!!!!!!!!!!"
