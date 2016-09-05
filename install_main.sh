@@ -228,4 +228,7 @@ gem install bundler
 sudo apt-get install gdm -y
 
 # INSTALL https://www.privateinternetaccess.com/pages/downloads
-echo "DOWNLOAD PRIVATE INTERNET ACCESS!!!!!!!!!!!!!!!!!"
+echo "Private internet access installation"
+mkdir --parents ~/PIA
+curl https://www.privateinternetaccess.com/openvpn/openvpn.zip -o ~/PIA/openvpn.zip
+unzip ~/PIA/openvpn.zip -d ~/PIA
