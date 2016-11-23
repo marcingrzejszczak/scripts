@@ -158,7 +158,7 @@ wget -O /tmp/atom-amd64.deb https://github.com/atom/atom/releases/download/v1.1.
 sudo dpkg --install /tmp/atom-amd64.deb
 
 # INSTALL ATOM PACKAGES
-apm install language-groovy an-color-picker atom-beautify merge-conflicts minimap file-icons travis-ci-status open-recent monokai-seti seti-ui todo-show highlight-selected minimap-highlight-selected autoclose-html pigments linter linter-javac linter-shellcheck linter-jsonlint linter-js-yaml auto-detect-indentation atom-beautify rest-client
+apm install language-groovy an-color-picker atom-beautify merge-conflicts minimap file-icons travis-ci-status open-recent monokai-seti seti-ui todo-show highlight-selected minimap-highlight-selected autoclose-html pigments linter linter-javac linter-shellcheck linter-jsonlint linter-js-yaml auto-detect-indentation atom-beautify rest-client atom-maven
 
 # Install Nodejs
 curl -sL "https://deb.nodesource.com/setup_4.x" | sudo -E bash -
