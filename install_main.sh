@@ -5,7 +5,7 @@ sudo apt-add-repository ppa:ansible/ansible -y
 sudo apt-get update -y
 
 # Install default applications
-sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmina remmina-plugin-rdp chromium-browser fish vagrant xbacklight xbindkeys gnome-system-monitor httpie python-pip rar unrar maven k3b myrepos -y
+sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmina remmina-plugin-rdp chromium-browser vagrant xbacklight xbindkeys gnome-system-monitor httpie python-pip rar unrar zsh k3b myrepos -y
 
 # git kurwa
 cp .gitconfig ~/
@@ -17,12 +17,13 @@ cp .gitconfig ~/
 # gpg2 --armor --export <KEY_NUMBER>
 git config --global commit.gpgsign true
 
-# Add Fish as default shell (provide the password)
-chsh -s /usr/bin/fish
+cp .zshrc ~/
 
-# Copy all fish related stuff to fish directory
-cp fish ~/.config -r
-fundle install
+# Installing plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+chsh -s `which zsh`
 
 # Install ansible
 sudo apt-get install software-properties-common ansible -y
@@ -32,42 +33,12 @@ sudo apt-get install ruby-full ruby git-core -y
 
 # Bind shortcuts to inc/dec brightness
 cat > ~/.xbindkeysrc << EOF
-"xbacklight -dec 10"
+"xbacklight -dec 2"
     Control + Shift + minus
 
-"xbacklight -inc 10"
+"xbacklight -inc 2"
     Control + Shift + plus
 EOF
-
-# Brightness issues
-
-# APPROACH 1
-
-# What worked for me was modifying the /etc/default/grub file.
-# Change the line
-#
-# GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
-# to
-#
-# GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_osi=Linux acpi_backlight=vendor"
-# Then in a terminal sudo update-grub and reboot.
-# sudo sed 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_osi=Linux acpi_backlight=vendor"/g' /etc/default/grub
-
-
-# APPROACH 2
-# http://itsfoss.com/fix-brightness-ubuntu-1310/
-# sudo touch /usr/share/X11/xorg.conf.d/20-intel.conf
-#if grep -q -v intel_backlight /usr/share/X11/xorg.conf.d/20-intel.conf; then
-#	sudo cat >> /usr/share/X11/xorg.conf.d/20-intel.conf << EOF
-#Section "Device"
-#        Identifier  "card0"
-#        Driver      "intel"
-#        Option      "Backlight"  "intel_backlight"
-#        BusID       "PCI:0:2:0"
-#EndSection
-#EOF
-#
-#fi
 
 # APPROACH 3
 # backlight keys are working again
@@ -84,44 +55,14 @@ sudo apt-get upgrade -y
 # Remove obsolete packages
 sudo apt-get autoremove -y
 
-# Remove this stupid Error: diskfilter writes are not supported. from grub
-# go to
-# sudo vim /etc/grub.d/10_linux
-# comment the whole section with recordfail
-#   cat << EOF
-#      recordfail
-#
-# run
-# sudo update-grub
-
-# Install Jenv
-git clone https://github.com/gcuisinier/jenv.git ~/.jenv
-
 ## INSTALL ALL THE JDKS ANS STUFF
 
 # Install SDKMAN
 curl -s get.sdkman.io | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# Clone ansible-repo
-git clone git@github.com:microservice-hackathon/ansible-microservice-hackathon.git ~/repo/ansible-microservice-hackathon
-
-# INSTALL JDK and Zookeeper
-cp java-playbook.yaml ~/repo/ansible-microservice-hackathon
-cd ~/repo/ansible-microservice-hackathon
-sudo ansible-playbook -i localhost, -vvvv java-playbook.yaml
-
-sudo rm /usr/lib/jvm/default-java
-sudo ln -s /usr/lib/jvm/java-8-oracle /usr/lib/jvm/default-java
-
-# INSTALL GROOVY
-yes | sdk install groovy
-
-# INSTALL GRADLE
-yes | sdk install gradle
-
-# INSTALL SPRINGBOOT
-yes | sdk install springboot
+# INSTALL STUFF VIA SDK
+yes | sdk install java groovy gradle springboot maven asciidoctorj
 
 # Update Inotify watch limit for IntelliJ - https://confluence.jetbrains.com/pages/viewpage.action?pageId=25788581
 echo "fs.inotify.max_user_watches = 131072" | sudo tee --append /etc/sysctl.conf
@@ -172,16 +113,15 @@ sudo apt-get install -y --install-recommends pipelight-multi
 sudo pipelight-plugin --update
 
 # Install Slack client
-cd /tmp
-wget https://downloads.slack-edge.com/linux_releases/slack-desktop-2.0.6-amd64.deb
-sudo dpkg -i slack-*
+wget -O /tmp/slack.deb https://downloads.slack-edge.com/linux_releases/slack-desktop-2.3.4-amd64.deb
+sudo dpkg -i /tmp/slack.deb
 sudo apt-get -f install -y
 
 # Install Intellij idea
-wget -O /tmp/idea.tar.gz https://download.jetbrains.com/idea/ideaIU-2016.1.3.tar.gz
+wget -O /tmp/idea.tar.gz https://download.jetbrains.com/idea/ideaIU-2016.3.2.tar.gz
 mkdir $HOME/apps/JetBrains --parents
 tar -xf /tmp/idea.tar.gz -C $HOME/apps/JetBrains/
-ln -s $HOME/apps/JetBrains/idea-IU-143.1184.17 $HOME/apps/JetBrains/intellij
+ln -s $HOME/apps/JetBrains/idea-IU-163.10154.41 $HOME/apps/JetBrains/intellij
 # REMEMBER TO IMPORT SETTINGS FROM idea_settings.jar
 
 # Install Skype
