@@ -17,13 +17,14 @@ cp .gitconfig ~/
 # gpg2 --armor --export <KEY_NUMBER>
 git config --global commit.gpgsign true
 
+wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+chsh -s `which zsh`
+
+sudo chown marcin:marcin ~/.zshrc
 cp .zshrc ~/
 
 # Installing plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-
-wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
-chsh -s `which zsh`
 
 # Install ansible
 sudo apt-get install software-properties-common ansible -y
