@@ -84,7 +84,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home
+export JAVA_HOME=~/.sdkman/candidates/java/current
 export GRADLE_HOME=~/.sdkman/candidates/gradle/current
 export GROOVY_HOME=~/.sdkman/candidates/groovy/current
 

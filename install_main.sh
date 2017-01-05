@@ -63,7 +63,12 @@ curl -s get.sdkman.io | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # INSTALL STUFF VIA SDK
-yes | sdk install java groovy gradle springboot maven asciidoctorj
+yes | sdk install java
+yes | sdk install groovy
+yes | sdk install gradle
+yes | sdk install springboot
+yes | sdk install maven
+yes | sdk install asciidoctorj
 
 # Update Inotify watch limit for IntelliJ - https://confluence.jetbrains.com/pages/viewpage.action?pageId=25788581
 echo "fs.inotify.max_user_watches = 131072" | sudo tee --append /etc/sysctl.conf
