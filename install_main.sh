@@ -9,7 +9,7 @@ sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmin
 
 # Install additional stuff
 # midori - fast lightweight browser
-sudo apt-get install midori jq
+sudo apt-get install midori jq -y
 
 # git kurwa
 cp .gitconfig ~/
