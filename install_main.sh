@@ -7,6 +7,10 @@ sudo apt-get update -y
 # Install default applications
 sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmina remmina-plugin-rdp chromium-browser vagrant xbacklight xbindkeys gnome-system-monitor httpie python-pip rar unrar zsh k3b myrepos -y
 
+# Install additional stuff
+# midori - fast lightweight browser
+sudo apt-get install midori jq
+
 # git kurwa
 cp .gitconfig ~/
 
