@@ -12,19 +12,10 @@ sudo chown -R `whoami`:admin /usr/local/bin
 sudo chown -R `whoami`:admin /usr/local/opt
 
 # Install default applications
-brew install wget midnight-commander Caskroom/cask/mcedit vim fish Caskroom/cask/vagrant ansible maven mr bash
-
-sudo bash -c "echo /usr/local/bin/bash >> /private/etc/shells"
+brew install wget midnight-commander Caskroom/cask/mcedit vim Caskroom/cask/vagrant ansible maven mr bash"
 
 # git kurwa
 cp .gitconfig ~/
-
-# Add Fish as default shell (provide the password)
-echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
-chsh -s /usr/local/bin/fish
-
-# Copy all fish related stuff to fish directory
-cp -R fish ~/.config  
 
 ## INSTALL ALL THE JDKS ANS STUFF
 
@@ -34,7 +25,6 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Clone ansible-repo
 mkdir ~/repo
-git clone git@github.com:microservice-hackathon/ansible-microservice-hackathon.git ~/repo/ansible-microservice-hackathon
 
 # INSTALL JDK
 # will be installed to: /opt/homebrew-cask/Caskroom/java/
