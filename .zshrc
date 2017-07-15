@@ -91,4 +91,5 @@ export GROOVY_HOME=~/.sdkman/candidates/groovy/current
 export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="$GRADLE_HOME/bin:$PATH"
 export PATH="$GROOVY_HOME/bin:$PATH"
-export PATH="~/apps/fly/:$PATH"
+export PATH="/home/marcin/apps/fly/:$PATH"
+export MAVEN_OPTS=-Djava.net.preferIPv4Stack=true
