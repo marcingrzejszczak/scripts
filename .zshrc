@@ -93,3 +93,7 @@ export PATH="$GRADLE_HOME/bin:$PATH"
 export PATH="$GROOVY_HOME/bin:$PATH"
 export PATH="/home/marcin/apps/fly/:$PATH"
 export MAVEN_OPTS=-Djava.net.preferIPv4Stack=true
+
+# Issues with gpg signing
+GPG_TTY=$(tty)
+export GPG_TTY
