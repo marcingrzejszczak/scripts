@@ -5,10 +5,14 @@ sudo apt-add-repository ppa:ansible/ansible -y
 sudo apt-get update -y
 
 # Install default applications
-sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmina remmina-plugin-rdp chromium-browser vagrant xbacklight xbindkeys gnome-system-monitor httpie python-pip rar unrar zsh k3b myrepos -y
+sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmina remmina-plugin-rdp chromium-browser vagrant xbacklight xbindkeys gnome-system-monitor httpie python-pip rar unrar zsh k3b myrepos terminator kazam -y
 
 # Install additional stuff
 sudo apt-get install jq -y
+
+# Install ukuu - software to update kernel
+sudo add-apt-repository ppa:teejee2008/ppa -y
+sudo apt-get update -y && sudo apt-get install ukuu -y
 
 # git kurwa
 cp .gitconfig ~/
@@ -27,7 +31,7 @@ sudo chown marcin:marcin ~/.zshrc
 cp .zshrc ~/
 
 # Installing plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+#git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 # Install ansible
 sudo apt-get install software-properties-common ansible -y
@@ -36,6 +40,7 @@ sudo apt-get install software-properties-common ansible -y
 sudo apt-get install ruby-full ruby git-core -y
 
 # Bind shortcuts to inc/dec brightness
+# For ASUS only
 cat > ~/.xbindkeysrc << EOF
 "xbacklight -dec 2"
     Control + Shift + minus
@@ -49,9 +54,9 @@ EOF
 # http://ubuntuforums.org/showthread.php?t=1605498
 # also installed acpi-support:i386 (don't know if relevant)
 # sudo apt-get install acpi-support:i386
-sudo sed 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="i915.powersave=0 acpi_backlight=vendor vga=792 quiet splash""i915.powersave=0 acpi_backlight=vendor vga=792 quiet splash"/g' /etc/default/grub
-sudo cp etc/acpi/*.sh /etc/acpi
-sudo update-grub
+#sudo sed 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="i915.powersave=0 acpi_backlight=vendor vga=792 quiet splash""i915.powersave=0 acpi_backlight=vendor vga=792 quiet splash"/g' /etc/default/grub
+#sudo cp etc/acpi/*.sh /etc/acpi
+#sudo update-grub
 
 # Upgrade
 sudo apt-get upgrade -y
@@ -110,6 +115,10 @@ sudo dpkg --install /tmp/atom-amd64.deb
 # INSTALL ATOM PACKAGES
 apm install language-groovy atom-beautify merge-conflicts minimap file-icons travis-ci-status open-recent monokai-seti seti-ui todo-show highlight-selected minimap-highlight-selected autoclose-html pigments linter linter-javac linter-shellcheck linter-jsonlint linter-js-yaml auto-detect-indentation atom-beautify rest-client atom-maven intellij-idea-keymap
 
+# Install ZOOM
+wget -O /tmp/zoom_amd64.deb https://zoom.us/client/latest/zoom_amd64.deb
+sudo dpkg --install /tmp/zoom_amd64.deb
+
 # Install Nodejs
 curl -sL "https://deb.nodesource.com/setup_4.x" | sudo -E bash -
 sudo apt-get install -y nodejs
@@ -126,12 +135,11 @@ wget -O /tmp/slack.deb https://downloads.slack-edge.com/linux_releases/slack-des
 sudo dpkg -i /tmp/slack.deb
 sudo apt-get -f install -y
 
-# Install Intellij idea
-wget -O /tmp/idea.tar.gz https://download.jetbrains.com/idea/ideaIU-2016.3.2.tar.gz
+# Install Jetbrains Toolbox
+wget -O /tmp/toolbox.tar.gz https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.13.4733.tar.gz
 mkdir $HOME/apps/JetBrains --parents
-tar -xf /tmp/idea.tar.gz -C $HOME/apps/JetBrains/
-ln -s $HOME/apps/JetBrains/idea-IU-163.10154.41 $HOME/apps/JetBrains/intellij
-# REMEMBER TO IMPORT SETTINGS FROM idea_settings.jar
+tar -xf /tmp/toolbox.tar.gz -C $HOME/apps/JetBrains/
+ln -s $HOME/apps/JetBrains/jetbrains-toolbox-* $HOME/apps/JetBrains/toolbox
 
 # Install Skype
 sudo apt-get install libqt4-dbus libqt4-network libqt4-xml libasound2 -y
@@ -157,8 +165,8 @@ sudo apt-get update && sudo apt-get install xfce4-power-manager light-locker-set
 # REMEMBER TO CHANGE DRIVERS TO NVIDIA!!
 
 # Install Viber
-wget -O /tmp/viber.deb http://download.cdn.viber.com/cdn/desktop/Linux/viber.deb
-sudo dpkg -i /tmp/viber.deb
+#wget -O /tmp/viber.deb http://download.cdn.viber.com/cdn/desktop/Linux/viber.deb
+#sudo dpkg -i /tmp/viber.deb
 
 # Install imapsync
 sudo apt-get install makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl -y
@@ -181,3 +189,21 @@ echo "Private internet access installation"
 mkdir --parents ~/PIA
 curl https://www.privateinternetaccess.com/openvpn/openvpn.zip -o ~/PIA/openvpn.zip
 unzip ~/PIA/openvpn.zip -d ~/PIA
+
+# INSTALL Spotify
+# 1. Add the Spotify repository signing keys to be able to verify downloaded packages
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+# 2. Add the Spotify repository
+echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+# 3. Update list of available packages
+sudo apt-get update -y
+# 4. Install Spotify
+sudo apt-get install spotify-client -y
+
+# INSTALL Gitter
+wget -O /tmp/gitter.deb https://update.gitter.im/linux64/latest
+sudo dpkg -i /tmp/gitter.deb
+
+# INSTALL TeamViewer
+wget -O /tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+sudo dpkg -i /tmp/teamviewer.deb
