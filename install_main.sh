@@ -66,7 +66,7 @@ sudo apt-get autoremove -y
 ## INSTALL ALL THE JDKS ANS STUFF
 
 # Install SDKMAN
-curl -s get.sdkman.io | bash
+curl -s https://get.sdkman.io | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # INSTALL STUFF VIA SDK
