@@ -41,13 +41,12 @@ sudo apt-get install ruby-full ruby git-core -y
 
 # Bind shortcuts to inc/dec brightness
 # For ASUS only
-cat > ~/.xbindkeysrc << EOF
-"xbacklight -dec 2"
-    Control + Shift + minus
-
-"xbacklight -inc 2"
-    Control + Shift + plus
-EOF
+#"xbacklight -dec 2"
+#    Control + Shift + minus
+#
+#"xbacklight -inc 2"
+#    Control + Shift + plus
+#EOF
 
 # APPROACH 3
 # backlight keys are working again
@@ -125,10 +124,10 @@ sudo apt-get install -y nodejs
 sudo apt-get install -y build-essential
 
 # Install pipelight
-sudo add-apt-repository ppa:pipelight/stable
-sudo apt-get update
-sudo apt-get install -y --install-recommends pipelight-multi
-sudo pipelight-plugin --update
+#sudo add-apt-repository ppa:pipelight/stable
+#sudo apt-get update
+#sudo apt-get install -y --install-recommends pipelight-multi
+#sudo pipelight-plugin --update
 
 # Install Slack client
 wget -O /tmp/slack.deb https://downloads.slack-edge.com/linux_releases/slack-desktop-2.3.4-amd64.deb
@@ -159,8 +158,8 @@ wget -O /tmp/hangouts.deb https://dl.google.com/linux/direct/google-talkplugin_c
 sudo dpkg -i /tmp/hangouts.deb
 
 # Xubuntu issues  - https://bugs.launchpad.net/ubuntu/+source/light-locker/+bug/1320989
-sudo add-apt-repository ppa:xubuntu-dev/ppa
-sudo apt-get update && sudo apt-get install xfce4-power-manager light-locker-settings
+#sudo add-apt-repository ppa:xubuntu-dev/ppa
+#sudo apt-get update && sudo apt-get install xfce4-power-manager light-locker-settings
 
 # REMEMBER TO CHANGE DRIVERS TO NVIDIA!!
 
