@@ -12,4 +12,4 @@ sudo apt-add-repository 'http://security.ubuntu.com/ubuntu disco-security univer
 sudo apt-add-repository 'http://security.ubuntu.com/ubuntu disco-security multiverse' -y
 sudo apt-add-repository '[arch=amd64] http://packages.microsoft.com/repos/vscode stable main' -y
 sudo apt-add-repository ppa:certbot/certbot -y
-sudo apt-add-repository 'https://packagecloud.io/slacktechnologies/slack/debian/ jessie main' -y
+sudo apt-add-repository 'https://packagecloud.io/slacktechnologies/slack/debian/ jessie main' -y || echo "Failed"
