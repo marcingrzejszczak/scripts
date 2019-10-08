@@ -211,3 +211,7 @@ sudo dpkg -i /tmp/gitter.deb
 # INSTALL TeamViewer
 wget -O /tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
 sudo dpkg -i /tmp/teamviewer.deb
+
+#Install Visual Studio Code
+wget -O /tmp/code.deb https://go.microsoft.com/fwlink/?LinkID=760868
+sudo dpkg -i /tmp/code.deb
