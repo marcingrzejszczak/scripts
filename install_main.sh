@@ -103,6 +103,8 @@ sudo usermod -aG docker marcin
 pip install --upgrade pip
 sudo pip install -U docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
+yes | sudo pip uninstall docker && sudo apt install python-docker -y && python2 -c 'import docker; print(docker.__version__)'
+
 
 # TOR BROWSER
 # https://www.torproject.org/projects/torbrowser.html.en
