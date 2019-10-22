@@ -7,6 +7,9 @@ sudo apt-get update -y
 # Install default applications
 sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmina remmina-plugin-rdp chromium-browser vagrant xbacklight xbindkeys gnome-system-monitor httpie python-pip rar unrar zsh k3b myrepos terminator kazam compizconfig-settings-manager -y
 
+# For compizconfig-settings-manager
+# Go to [Desktop Wall -> Bindings -> Move within wall]
+
 # Install additional stuff
 sudo apt-get install jq -y
 
