@@ -11,6 +11,13 @@ sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmin
 # Go to ~/.config/openbox/lxqt-rc.xml
 # Modify the <keyboard> section
 
+# IMPORTANT
+# Check https://www.woolie.co.uk/article/dell-laptop-stuck-800mhz-linux-fix/
+# Edit the following file: /etc/default/grub
+# On about the 9th line down, you’ll see a line that says GRUB_CMDLINE_LINUX_DEFAULT="quiet splash". This appends whatever you provide to the end of each Linux entry in the boot menu. Add the kernel parameter from before to the end of this line:
+# GRUB_CMDLINE_LINUX_DEFAULT="quiet splash processor.ignore_ppc=1"
+# Don’t forget to update GRUB and reboot: sudo update-grub && sudo reboot
+
 # Install additional stuff
 sudo apt-get install jq -y
 
