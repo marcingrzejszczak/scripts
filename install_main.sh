@@ -1,11 +1,21 @@
 #!/bin/bash
 
+set -o errexit
+
 # Update repositories
 sudo apt-add-repository ppa:ansible/ansible -y
 sudo apt-get update -y
 
 # Install default applications
-sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmina remmina-plugin-rdp chromium-browser vagrant xbacklight xbindkeys gnome-system-monitor httpie python-pip rar unrar zsh k3b myrepos terminator kazam compizconfig-settings-manager obconf -y
+sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmina remmina-plugin-rdp chromium-browser vagrant xbacklight xbindkeys gnome-system-monitor httpie python3-pip rar unrar zsh k3b myrepos terminator kazam compizconfig-settings-manager obconf -y
+
+
+# Install Brave
+sudo apt install apt-transport-https curl -y
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update
+sudo apt install brave-browser -y
 
 # [LUBUNTU] changing the shortcuts for desktop switching
 # Go to ~/.config/openbox/lxqt-rc.xml
@@ -22,8 +32,8 @@ sudo apt-get install git gparted mc mcedit vim virtualbox-dkms virtualbox remmin
 sudo apt-get install jq -y
 
 # Install ukuu - software to update kernel
-sudo add-apt-repository ppa:teejee2008/ppa -y
-sudo apt-get update -y && sudo apt-get install ukuu -y
+# sudo add-apt-repository ppa:teejee2008/ppa -y
+# sudo apt-get update -y && sudo apt-get install ukuu -y
 
 # git kurwa
 cp .gitconfig ~/
@@ -96,29 +106,32 @@ sudo sysctl -p
 sudo apt-get autoremove -y
 
 # INSTALL DOCKER
-sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-sudo rm -f /etc/apt/sources.list.d/docker.list
-echo "deb https://apt.dockerproject.org/repo ubuntu-wily main" | sudo tee --append /etc/apt/sources.list.d/docker.list
-sudo apt-get update -y
-sudo apt-get purge lxc-docker
-sudo apt-cache policy docker-engine
-sudo apt-get install linux-image-extra-$(uname -r) -y
-sudo apt-get install docker-engine -y
-sudo service docker start
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release -y
 
-sudo curl -sSL https://get.docker.com/gpg | sudo apt-key add -
-sudo curl -sSL https://get.docker.com/ | sh
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 sudo usermod -aG docker marcin
 
 # INSTALL DOCKER-COMPOSE
-pip install --upgrade pip
-sudo pip install -U docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-yes | sudo pip uninstall docker && sudo apt install python-docker -y && python2 -c 'import docker; print(docker.__version__)'
+ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+ sudo chmod +x /usr/local/bin/docker-compose
 
 
 # TOR BROWSER
 # https://www.torproject.org/projects/torbrowser.html.en
+
+mkdir -p ~/apps/tor
+curl -L "https://www.torproject.org/dist/torbrowser/10.5.10/tor-browser-linux64-10.5.10_en-US.tar.xz" -o ~/apps/tor/
 
 # INSTALL ATOM
 # wget -O /tmp/atom-amd64.deb https://github.com/atom/atom/releases/download/v1.1.0/atom-amd64.deb
@@ -132,9 +145,8 @@ wget -O /tmp/zoom_amd64.deb https://zoom.us/client/latest/zoom_amd64.deb
 sudo dpkg --install /tmp/zoom_amd64.deb
 
 # Install Nodejs
-curl -sL "https://deb.nodesource.com/setup_4.x" | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs
-sudo apt-get install -y build-essential
 
 # Install pipelight
 #sudo add-apt-repository ppa:pipelight/stable
@@ -143,7 +155,7 @@ sudo apt-get install -y build-essential
 #sudo pipelight-plugin --update
 
 # Install Slack client
-wget -O /tmp/slack.deb https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.2-amd64.deb
+wget -O /tmp/slack.deb https://downloads.slack-edge.com/releases/linux/4.20.0/prod/x64/slack-desktop-4.20.0-amd64.deb
 sudo dpkg -i /tmp/slack.deb
 sudo apt-get -f install -y
 
@@ -167,8 +179,8 @@ sudo apt-get -f install -y
 # sudo apt-get install hipchat -y
 
 # Install Hangouts plugin
-wget -O /tmp/hangouts.deb https://dl.google.com/linux/direct/google-talkplugin_current_amd64.deb
-sudo dpkg -i /tmp/hangouts.deb
+# wget -O /tmp/hangouts.deb https://dl.google.com/linux/direct/google-talkplugin_current_amd64.deb
+# sudo dpkg -i /tmp/hangouts.deb
 
 # Xubuntu issues  - https://bugs.launchpad.net/ubuntu/+source/light-locker/+bug/1320989
 #sudo add-apt-repository ppa:xubuntu-dev/ppa
@@ -181,14 +193,19 @@ sudo dpkg -i /tmp/hangouts.deb
 #sudo dpkg -i /tmp/viber.deb
 
 # Install imapsync
-sudo apt-get install makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl -y
+# sudo apt-get install makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl -y
 
 # Install RVM
-gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-curl -sSL https://get.rvm.io | bash -s stable
-curl -L --create-dirs -o ~/.config/fish/functions/rvm.fish https://raw.github.com/lunks/fish-nuggets/master/functions/rvm.fish
-echo "rvm default" >> ~/.config/fish/config.fish
-gem install bundler
+sudo apt-get install software-properties-common -y
+sudo apt-add-repository -y ppa:rael-gc/rvm
+sudo apt-get update
+sudo apt-get install rvm -y
+
+# gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+# curl -sSL https://get.rvm.io | bash -s stable
+# curl -L --create-dirs -o ~/.config/fish/functions/rvm.fish https://raw.github.com/lunks/fish-nuggets/master/functions/rvm.fish
+# echo "rvm default" >> ~/.config/fish/config.fish
+# gem install bundler
 # For Octopress blog:
 #rbenv rehash    # If you use rbenv, rehash to be able to run the bundle command
 #bundle install
@@ -201,25 +218,23 @@ echo "Private internet access installation"
 #mkdir --parents ~/PIA
 #curl https://www.privateinternetaccess.com/openvpn/openvpn.zip -o ~/PIA/openvpn.zip
 #unzip ~/PIA/openvpn.zip -d ~/PIA
-cd ~
-wget https://installers.privateinternetaccess.com/download/pia-v82-installer-linux.tar.gz
-tar -xzf ./pia-v82-installer-linux.tar.gz
-./pia-v82-installer-linux.sh
-
+wget -O /tmp/pia.run https://installers.privateinternetaccess.com/download/pia-linux-3.1-06756.run
+chmod +x /tmp/pia.run
+/tmp/pia.run
 
 # INSTALL Spotify
 # 1. Add the Spotify repository signing keys to be able to verify downloaded packages
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
 # 2. Add the Spotify repository
-echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+# echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 # 3. Update list of available packages
-sudo apt-get update -y
+# sudo apt-get update -y
 # 4. Install Spotify
-sudo apt-get install spotify-client -y
+# sudo apt-get install spotify-client -y
 
 # INSTALL Gitter
-wget -O /tmp/gitter.deb https://update.gitter.im/linux64/latest
-sudo dpkg -i /tmp/gitter.deb
+# wget -O /tmp/gitter.deb https://update.gitter.im/linux64/latest
+#sudo dpkg -i /tmp/gitter.deb
 
 # INSTALL TeamViewer
 wget -O /tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
@@ -231,7 +246,6 @@ sudo dpkg -i /tmp/code.deb
 echo "Fetch all settings via the Settings Sync extenstion"
 
 #Install Kubectl
-curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
-chmod +x kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
-kubectl version
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client

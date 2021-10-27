@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # games :)
-sudo apt-get install steam wine playonlinux winetricks -y
+# sudo apt-get install steam wine playonlinux winetricks -y
 #pip install soccer-cli
 
 # Baldurs Gate2
@@ -17,5 +17,5 @@ sudo apt-get install steam wine playonlinux winetricks -y
 # http://www.retrohive.com/2013/09/play-starcraft-ii-linux-ubuntu/
 # http://us.battle.net/en/forum/topic/14609931527
 # http://www.gamersonlinux.com/forum/threads/starcraft-ii-guide.387/
-winetricks fontfix fontsmooth-rgb gdiplus gecko vcrun2008 vcrun2005 d3dx11_43 win7 ie6
+# winetricks fontfix fontsmooth-rgb gdiplus gecko vcrun2008 vcrun2005 d3dx11_43 win7 ie6
 
