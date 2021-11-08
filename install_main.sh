@@ -161,16 +161,16 @@ sudo dpkg -i /tmp/slack.deb
 sudo apt-get -f install -y
 
 # Install Jetbrains Toolbox
-wget -O /tmp/toolbox.tar.gz https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.15.5786.tar.gz
+wget -O /tmp/toolbox.tar.gz https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.17.7391.tar.gz
 mkdir $HOME/apps/JetBrains --parents
 tar -xf /tmp/toolbox.tar.gz -C $HOME/apps/JetBrains/
 ln -s $HOME/apps/JetBrains/jetbrains-toolbox-* $HOME/apps/JetBrains/toolbox
 
 # Install Skype
-sudo apt-get install libqt4-dbus libqt4-network libqt4-xml libasound2 -y
+# sudo apt-get install libqt4-dbus libqt4-network libqt4-xml libasound2 -y
 cd /tmp
-wget http://www.skype.com/go/getskype-linux-beta-ubuntu-64
-sudo dpkg -i getskype-*
+wget https://go.skype.com/skypeforlinux-64.deb
+sudo dpkg -i /tmp/skypeforlinux-64.deb
 sudo apt-get -f install -y
 
 # Install hipchat
