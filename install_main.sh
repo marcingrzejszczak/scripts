@@ -141,6 +141,7 @@ curl -L "https://www.torproject.org/dist/torbrowser/10.5.10/tor-browser-linux64-
 # apm install language-groovy atom-beautify merge-conflicts minimap file-icons travis-ci-status open-recent monokai-seti seti-ui todo-show highlight-selected minimap-highlight-selected autoclose-html pigments linter linter-javac linter-shellcheck linter-jsonlint linter-js-yaml auto-detect-indentation atom-beautify rest-client atom-maven intellij-idea-keymap
 
 # Install ZOOM
+sudo apt --fix-broken install -y
 wget -O /tmp/zoom_amd64.deb https://zoom.us/client/latest/zoom_amd64.deb
 sudo dpkg --install /tmp/zoom_amd64.deb
 
