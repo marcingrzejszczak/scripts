@@ -131,7 +131,7 @@ sudo usermod -aG docker marcin
 # https://www.torproject.org/projects/torbrowser.html.en
 
 mkdir -p ~/apps/tor
-curl -L "https://www.torproject.org/dist/torbrowser/10.5.10/tor-browser-linux64-10.5.10_en-US.tar.xz" -o ~/apps/tor/
+curl -L "https://www.torproject.org/dist/torbrowser/10.5.10/tor-browser-linux64-10.5.10_en-US.tar.xz" -o ~/apps/tor/tor-browser-linux64.xz
 
 # INSTALL ATOM
 # wget -O /tmp/atom-amd64.deb https://github.com/atom/atom/releases/download/v1.1.0/atom-amd64.deb
